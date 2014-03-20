@@ -1,4 +1,3 @@
-
 var makeIterator = function (cx, cy) {
 	var x = cx, y = cy;
 	return function () {
@@ -25,7 +24,8 @@ var makeCanvas = function (size) {
 };
 
 var escaped = function (x, y) {
-	 return x > 2 || x < -2 || y > 2 || y < -2;
+	 // escaped circle of radius 2
+	 return x*x + y*y > 4;
 };
 
 var iterate = function (canvas, callback) {
