@@ -15,8 +15,8 @@ var makeCanvas = function (size) {
 	for (i = 0; i < width; i++) {
 		pixels.push([]);
 		for (j = 0; j < height; j++) {
-			x = x - offset;
-			y = y - offset;
+			x = j - offset;
+			y = i - offset;
 			it = makeIterator(x, y);
 			pixels[i].push(it);
 		}
