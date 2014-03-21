@@ -26,11 +26,14 @@ def iterate(x, y, limit=10):
 def main():
 	colors = itertools.cycle(["red", "yellow", "blue"])
 	size = 100
-	for x in xrange(size):
-		for y in xrange(size):
+	offset = size / 2
+	for i in xrange(size):
+		for j in xrange(size):
+			x, y = i - offset, j - offset
 			it_count = iterate(x, y)
-			color = itertools.isslice(colors, it_count, it_count+1)
-			# draw color on at x, y
+			if it_count is not None:
+				color = itertools.isslice(colors, it_count, it_count+1)
+				draw(x, y, color)
 
 
 if __name__ == '__main__':
