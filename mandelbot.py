@@ -31,7 +31,7 @@ def pixel_to_complex_plane(x, y, size):
 
 def make_grayscale_pallet(size):
 	step = 255 / size
-	return [(step*i, step*i, step*i) for i in xrange(size)]
+	return [(step*i,) * 3 for i in xrange(size)]
 
 def main():
 	size = 1000
