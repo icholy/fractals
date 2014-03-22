@@ -1,16 +1,16 @@
 import Image
 import os
 
-
 def has_escaped(x, y):
 	"has the point escaped a circle of radius 2"
-	return x*x + y*y > 4
+	return x*x + y*y >= 4
 
 def make_iterator(x, y):
 	cx, cy = x, y
 	while True:
-		x = x*x + y*y + cx
-		y = 2*x*y + cy
+		nx = x*x - y*y + cx
+		ny = 2*x*y + cy
+		x, y = nx, ny
 		yield x, y
 
 def iterate(x, y, limit=1):
@@ -38,7 +38,7 @@ def main():
 		for j in xrange(size):
 			x, y = pixel_to_complex_plane(i, j, size)
 			if not has_escaped(x, y):
-				it_count = iterate(x, y, limit=50)
+				it_count = iterate(x, y, limit=100)
 				if it_count != -1:
 					pixels[i, j] = get_colour(it_count)
 	img.save('out.bmp')
