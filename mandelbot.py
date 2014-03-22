@@ -13,29 +13,30 @@ def make_iterator(x, y):
 		y = 2*x*y + cy
 		yield x, y
 
-def iterate(x, y, limit=10):
+def iterate(x, y, limit=1):
 	it = make_iterator(x, y)
-	it_count = 0
-	for x, y in it:
-		it_count += 1
+	for i in xrange(limit):
+		x, y = next(it)
 		if has_escaped(x, y):
-			return it_count
-		if it_count > limit:
-			return -1
+			return i + 1
+	return -1
 
 def get_colour(index):
 	index = (index % 3) - 1
 	return [(255, 0, 0), (0, 255, 0), (0, 0, 255)][index]
 
+def pixel_to_complex_plane(x, y, size):
+	x = (4 * ((4 / size) * x)) - 2
+	y = (4 * ((4 / size) * y)) - 2
+	return x, y
+
 def main():
 	img = Image.new('RGB', (1000, 1000), "black")
 	pixels = img.load()
 	size = 1000
-	offset = size / 2
 	for i in xrange(size):
 		for j in xrange(size):
-			x = i - offset
-			y = j - offset
+			x, y = pixel_to_complex_plane(i, j, size)
 			it_count = iterate(x, y)
 			if it_count != -1:
 				pixels[i, j] = get_colour(it_count)
