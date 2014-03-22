@@ -1,4 +1,4 @@
-fractals
+Mandelbrot Set
 ========
 
 ![](http://i.imgur.com/2INYWqN.png)
