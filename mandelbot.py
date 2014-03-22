@@ -21,26 +21,31 @@ def iterate(x, y, limit=1):
 			return i + 1
 	return -1
 
-def get_colour(index):
-	index = (index % 3) - 1
-	return [(255, 0, 0), (0, 255, 0), (0, 0, 255)][index]
+def get_colour(pallet, index):
+	return pallet[(index % len(pallet)) - 1]
 
 def pixel_to_complex_plane(x, y, size):
 	x = ((4.0 / size) * x) - 2
 	y = ((4.0 / size) * y) - 2
 	return x, y
 
+def make_grayscale_pallet(size):
+	step = 255 / size
+	return [(step*i, step*i, step*i) for i in xrange(size)]
+
 def main():
 	size = 1000
 	img = Image.new('RGB', (size, size), "black")
+	n_iterations = 50
+	pallet = make_grayscale_pallet(n_iterations)
 	pixels = img.load()
 	for i in xrange(size):
 		for j in xrange(size):
 			x, y = pixel_to_complex_plane(i, j, size)
 			if not has_escaped(x, y):
-				it_count = iterate(x, y, limit=100)
+				it_count = iterate(x, y, limit=n_iterations)
 				if it_count != -1:
-					pixels[i, j] = get_colour(it_count)
+					pixels[i, j] = get_colour(pallet, it_count)
 	img.save('out.bmp')
 	os.startfile('out.bmp')
 
