@@ -37,9 +37,10 @@ def main():
 	for i in xrange(size):
 		for j in xrange(size):
 			x, y = pixel_to_complex_plane(i, j, size)
-			it_count = iterate(x, y, limit=50)
-			if it_count != -1:
-				pixels[i, j] = get_colour(it_count)
+			if not has_escaped(x, y):
+				it_count = iterate(x, y, limit=50)
+				if it_count != -1:
+					pixels[i, j] = get_colour(it_count)
 	img.save('out.bmp')
 	os.startfile('out.bmp')
 
