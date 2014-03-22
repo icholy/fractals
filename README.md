@@ -1,4 +1,4 @@
 fractals
 ========
 
-struggling ... http://imgur.com/w4Nx15D
+![](http://i.imgur.com/2INYWqN.png)
