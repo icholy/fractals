@@ -26,18 +26,18 @@ def get_colour(index):
 	return [(255, 0, 0), (0, 255, 0), (0, 0, 255)][index]
 
 def pixel_to_complex_plane(x, y, size):
-	x = (4 * ((4 / size) * x)) - 2
-	y = (4 * ((4 / size) * y)) - 2
+	x = ((4.0 / size) * x) - 2
+	y = ((4.0 / size) * y) - 2
 	return x, y
 
 def main():
-	img = Image.new('RGB', (1000, 1000), "black")
-	pixels = img.load()
 	size = 1000
+	img = Image.new('RGB', (size, size), "black")
+	pixels = img.load()
 	for i in xrange(size):
 		for j in xrange(size):
 			x, y = pixel_to_complex_plane(i, j, size)
-			it_count = iterate(x, y)
+			it_count = iterate(x, y, limit=50)
 			if it_count != -1:
 				pixels[i, j] = get_colour(it_count)
 	img.save('out.bmp')
