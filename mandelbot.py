@@ -6,16 +6,10 @@ import os
 def has_escaped(x, y):
   return x*x + y*y >= 4
 
-def make_iterator(x, y):
-  cx, cy = x, y
-  while True:
-    x, y = x*x - y*y + cx, 2*x*y + cy
-    yield x, y
-
 def iterate(x, y, limit=1):
-  it = make_iterator(x, y)
+  cx, cy = x, y
   for i in xrange(limit):
-    x, y = next(it)
+    x, y = x*x - y*y + cx, 2*x*y + cy
     if has_escaped(x, y):
       return i + 1
   return -1
