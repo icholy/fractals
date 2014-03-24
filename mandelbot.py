@@ -24,7 +24,7 @@ def make_grayscale_pallet(size):
   return [(step*i,) * 3 for i in xrange(size)]
 
 def get_color(pallet, x):
-  if x == -1:
+  if x is -1:
     return (0, 0, 0)
   else:
     return pallet[x - 1]
