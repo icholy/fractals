@@ -35,7 +35,7 @@ def main():
   n_iterations = 50 # use 50 iterations to check for divergence
   fname = "out.bmp" # save image as
 
-  img = Image.new("RGB", (size, size), "black")
+  image = Image.new("RGB", (size, size), "black")
   pixels = img.load()
   pallet = make_grayscale_pallet(n_iterations)
 
@@ -45,7 +45,7 @@ def main():
       it_count = iterate(x, y, limit=n_iterations)
       pixels[px, py] = get_color(pallet, it_count)
 
-  img.save(fname)
+  image.save(fname)
 
 if __name__ == "__main__":
   main()
