@@ -14,7 +14,7 @@ def iterate(x, y, limit=1):
       return i + 1
   return -1
 
-def pixel_to_complex_plane(x, y, size):
+def pixel_to_complex(x, y, size):
   x = ((4.0 / size) * x) - 2
   y = ((4.0 / size) * y) - 2
   return x, y
@@ -36,12 +36,12 @@ def main():
   fname = "out.bmp" # save image as
 
   image = Image.new("RGB", (size, size), "black")
-  pixels = img.load()
+  pixels = image.load()
   pallet = make_grayscale_pallet(n_iterations)
 
   for px in xrange(size):
     for py in xrange(size):
-      x, y = pixel_to_complex_plane(px, py, size)
+      x, y = pixel_to_complex(px, py, size)
       it_count = iterate(x, y, limit=n_iterations)
       pixels[px, py] = get_color(pallet, it_count)
 
