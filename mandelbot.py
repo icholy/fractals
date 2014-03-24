@@ -20,9 +20,6 @@ def iterate(x, y, limit=1):
       return i + 1
   return -1
 
-def get_colour(pallet, index):
-  return pallet[(index % len(pallet)) - 1]
-
 def pixel_to_complex_plane(x, y, size):
   x = ((4.0 / size) * x) - 2
   y = ((4.0 / size) * y) - 2
@@ -46,7 +43,7 @@ def main():
       x, y = pixel_to_complex_plane(px, py, size)
       it_count = iterate(x, y, limit=n_iterations)
       if it_count != -1:
-        pixels[px, py] = get_colour(pallet, it_count)
+        pixels[px, py] = pallet[it_count - 1]
   img.save(fname)
 
 if __name__ == "__main__":
