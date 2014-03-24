@@ -29,6 +29,12 @@ def make_grayscale_pallet(size):
   step = int(255 / size)
   return [(step*i,) * 3 for i in xrange(size)]
 
+def get_color(pallet, x):
+  if x == -1:
+    return (0, 0, 0)
+  else:
+    return pallet[x - 1]
+
 def main():
 
   size = 1000       # 1000 x 1000 pixel output
@@ -36,14 +42,15 @@ def main():
   fname = "out.bmp" # save image as
 
   img = Image.new("RGB", (size, size), "black")
-  pallet = make_grayscale_pallet(n_iterations)
   pixels = img.load()
+  pallet = make_grayscale_pallet(n_iterations)
+
   for px in xrange(size):
     for py in xrange(size):
       x, y = pixel_to_complex_plane(px, py, size)
       it_count = iterate(x, y, limit=n_iterations)
-      if it_count != -1:
-        pixels[px, py] = pallet[it_count - 1]
+      pixels[px, py] = get_color(pallet, it_count)
+
   img.save(fname)
 
 if __name__ == "__main__":
