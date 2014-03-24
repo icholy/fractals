@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 
 import Image
-import os
 
 def has_escaped(x, y):
   return x*x + y*y >= 4
